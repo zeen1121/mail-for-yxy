@@ -60,22 +60,7 @@ def SendMail(to_addr,subject,content,attfile):
     
     
     
-##attfile='附件/安锋元宝原始数据.xlsx'
-##basename= os.path.basename(attfile) 
-##print(basename)
-###邮件内容
-##msg = MIMEMultipart()      # 邮件正文
-##msg['Subject'] = "测试邮件"     # 邮件标题
-##msg['From'] = mail_user        # 发件人
-##msg['To'] = ','.join(mail_to)         # 收件人，必须是一个字符串
-##msg.attach(MIMEText('张经理你好！\n    这是3月华南大区费用预算执行情况明细表，请接收查阅，如有疑问，请及时联系。谢谢！', 'plain', 'gb2312'))
-##
-##
-##part =  MIMEText(open(attfile, 'rb').read(), 'base64', 'gb2312')
-##part["Content-Type"] = 'application/octet-stream' 
-##part.add_header('Content-Disposition', 'attachment', filename=('gbk','',attfile.split('/')[1]))
-##
-##msg.attach(part)
+
 
 
 if __name__ == "__main__":

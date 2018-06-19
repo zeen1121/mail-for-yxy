@@ -13,12 +13,10 @@ import string
 
 #第三方SMTP服务
 ##mail_host = "smtp.exmail.qq.com"           # 设置服务器
-##mail_user = "yangxy@ake.com.cn"        # 用户名
-##mail_pwd  = "DZ8RhnZLmSef3bRf"      # 口令,QQ邮箱是输入授权码，在qq邮箱设置 里用验证过的手机发送短信获得，不含空格
-##mail_to  = ['569051642@qq.com']     #接收邮件列表,是list,不是字符串
+
 mail_host = "smtp.qq.com"           # 设置服务器
-mail_user = "569051642@qq.com"        # 用户名
-mail_pwd  = "xsqhrqoogxnmbcgi"
+mail_user = "569**@qq.com"        # 用户名
+mail_pwd  = "*****"
 
 
 

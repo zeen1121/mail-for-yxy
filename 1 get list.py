@@ -11,42 +11,55 @@ def month_minus(n):##输入差值输出n个月前的yyyy-mm格式日期字符串
     return results
 
 
-rootdir = "./附件"
 
 
-group_dic={}
-group_file = open('lib/group.txt')
-for line in group_file:
-    if '@' not in line:continue
-    gname,to_list,cc_list = line.strip().split('\t')
-    group_dic[gname]=[to_list,cc_list]
 
-##print(group_dic)
+#-------读取配置文件------------
+
+file_dic={}
+with open('lib/config.txt') as config:
+    for i in config:
+        if '@' not in i:continue
+        l = i.strip().split('\t')
+        key_word = l[0]
+        if key_word in file_dic:continue
+        file_dic[key_word]={}
+        file_dic[key_word]['to_list'] = l[1]
+        file_dic[key_word]['cc_list'] = l[2]
+        file_dic[key_word]['title'] = l[3]
+        file_dic[key_word]['content'] = l[4]
+        file_dic[key_word]['dist'] = l[5]
+
+#-------写待发送文件------------
 now = datetime.datetime.now().strftime('%Y-%m-%d %H_%M_%S')
 w = open('待发送 %s.txt'%now,'a')
-
+rootdir = "./附件"
 for parent,dirnames,filenames in os.walk(rootdir):
     for filename in filenames:
-        if 'BEMS华南大区预算执行情况明细表' in filename:
-            groupName = 'BEMS华南大区'
-            to_list = group_dic[groupName][0]
-            cc_list = group_dic[groupName][1]
-            subject = filename.split('.')[0]
-            title = '张经理你好！'
-            content = '这是MM月DD费用预算执行情况明细表，请接收查阅，如有疑问，请及时联系。谢谢！'
-            month = month_minus(1)
-            dist = '华南大区'
-        else:
-            to_list = '-'
-            cc_list = '-'
-            groupName = '-'
-            subject = '-'
-            title = '-'
-            content = '-'
-            month = '-'
-            dist = '-'
+        groupName = '-'
+        to_list = '-'
+        cc_list = '-'
+        groupName = '-'
+        subject = '-'
+        title = '-'
+        content = '-'
+        month = '-'
+        dist = '-'
+        for key_word in file_dic:
+            if key_word in filename:
+                groupName = file_dic[key_word]['dist']
+                to_list = file_dic[key_word]['to_list']
+                cc_list = file_dic[key_word]['cc_list']
+                subject = filename.split('.')[0]
+                title = file_dic[key_word]['title']
+                content = file_dic[key_word]['content']
+                month = month_minus(1)
+                dist = file_dic[key_word]['dist']
         w.write(('%s\t'*8+'%s\n')%(filename,groupName,to_list,cc_list,subject,title,content,month,dist))
             
 w.close()            
-         
+            
         
+
+
+
